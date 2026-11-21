@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+
+    TreeNode(int x) {
+        val = x;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+bool areIdentical(TreeNode* root1, TreeNode* root2) {
+    if (root1 == nullptr && root2 == nullptr) {
+        return true;
+    }
+    if (root1 == nullptr || root2 == nullptr) {
+        return false;
+    }
+    if (root1->val != root2->val) {
+        return false;
+    }
+    return areIdentical(root1->left, root2->left) && areIdentical(root1->right, root2->right);
+}
+
+int main() {
+    TreeNode* tree1 = new TreeNode(1);
+    tree1->left = new TreeNode(2);
+    tree1->right = new TreeNode(3);
+
+    TreeNode* tree2 = new TreeNode(1);
+    tree2->left = new TreeNode(2);
+    tree2->right = new TreeNode(3);
+
+    bool identical = areIdentical(tree1, tree2);
+    cout << boolalpha << identical;
+
+    return 0;
+}
